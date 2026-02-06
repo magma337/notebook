@@ -4,7 +4,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
-export default function LoginPage({ searchParams }: { searchParams: { message?: string, error?: string } }) {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ message?: string, error?: string }> }) {
+    const params = await searchParams
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
             <Card className="w-full max-w-md shadow-lg">
@@ -25,8 +26,8 @@ export default function LoginPage({ searchParams }: { searchParams: { message?: 
                                 <Label htmlFor="password">Password</Label>
                                 <Input id="password" name="password" type="password" required />
                             </div>
-                            {searchParams?.error && (
-                                <p className="text-sm font-medium text-red-500 text-center">{searchParams.error}</p>
+                            {params?.error && (
+                                <p className="text-sm font-medium text-red-500 text-center">{params.error}</p>
                             )}
                         </div>
                     </form>
